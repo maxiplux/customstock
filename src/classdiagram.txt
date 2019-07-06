@@ -1,0 +1,32 @@
+@startuml
+
+interface Observer{
+    notify ((String command,Object source)
+}
+interface Observevable{
+  notifyAllObsesrver(String command,Object source);
+  addObserver(Observer observer);
+  removeObserver(Observer observer);
+}
+
+ class SimpleStock {
+  void update(Map<String, Double> stocklist)
+}
+ class StockMarket {
+  void addStock(String stockSymbol, Double price)
+}
+
+abstract AbstractMarket {
+Map<String,Double> stocklist = new HashMap<String,Double>();
+ Map<String, Double> getStocklist()
+}
+Observevable <|-- AbstractMarket
+Observer <|-  SimpleStock
+SimpleStock <|-  StockBuyer
+SimpleStock <|-  StockViewer
+AbstractMarket <|-- StockMarket
+
+
+
+
+@enduml
