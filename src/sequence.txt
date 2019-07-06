@@ -1,0 +1,34 @@
+@startuml
+
+title "MUM homework Juan Mosquera"
+
+actor User
+
+boundary "Application" as Application
+
+
+Application -> "market:StockMarket:AbstractMarket:AbstractObservable<Observable>" : new
+activate "market:StockMarket:AbstractMarket:AbstractObservable<Observable>"  #FFBBBB
+Application -> "buyer:StockBuyer:Observer" : new
+Application -> "viewer:StockViewer:Observer" : new
+
+"market:StockMarket:AbstractMarket:AbstractObservable<Observable>"-> "market:StockMarket:AbstractMarket:AbstractObservable<Observable>" : addObserver(buyer)
+"market:StockMarket:AbstractMarket:AbstractObservable<Observable>" -> "market:StockMarket:AbstractMarket:AbstractObservable<Observable>" : addObserver(viewer)
+
+"market:StockMarket:AbstractMarket:AbstractObservable<Observable>" -> "market:StockMarket:AbstractMarket:AbstractObservable<Observable>" : addStock(viewer)
+"market:StockMarket:AbstractMarket:AbstractObservable<Observable>" -> "market:StockMarket:AbstractMarket:AbstractObservable<Observable>" : addStock("ORC", 12.23)
+
+"market:StockMarket:AbstractMarket:AbstractObservable<Observable>" -> "market:StockMarket:AbstractMarket:AbstractObservable<Observable>" : notifyAllObsesrver("ORC", datasource)
+"market:StockMarket:AbstractMarket:AbstractObservable<Observable>" -> "market:StockMarket:AbstractMarket:AbstractObservable<Observable>" : addStock("MSC", 45.78)
+"market:StockMarket:AbstractMarket:AbstractObservable<Observable>" -> "market:StockMarket:AbstractMarket:AbstractObservable<Observable>" : notifyAllObsesrver("ORC", datasource)
+
+
+"market:StockMarket:AbstractMarket:AbstractObservable<Observable>" -> "market:StockMarket:AbstractMarket:AbstractObservable<Observable>" : update("ORC", 12.34)
+"market:StockMarket:AbstractMarket:AbstractObservable<Observable>" ->  "market:StockMarket:AbstractMarket:AbstractObservable<Observable>": notifyAllObsesrver("ORC", datasource)
+"market:StockMarket:AbstractMarket:AbstractObservable<Observable>" -> "market:StockMarket:AbstractMarket:AbstractObservable<Observable>" : update("MSC", 45.68)
+"market:StockMarket:AbstractMarket:AbstractObservable<Observable>" ->  "market:StockMarket:AbstractMarket:AbstractObservable<Observable>" : notifyAllObsesrver("MSC", datasource)
+
+
+
+
+@enduml
